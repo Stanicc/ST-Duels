@@ -5,6 +5,6 @@ public enum MatchState {
     WAITING,
     STARTING,
     RUNNING,
-    FINISHING,
+    FINISHING
 
 }

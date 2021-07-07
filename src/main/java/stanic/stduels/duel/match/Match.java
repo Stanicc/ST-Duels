@@ -1,12 +1,17 @@
 package stanic.stduels.duel.match;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
+import stanic.stduels.Main;
 import stanic.stduels.duel.match.controller.MatchController;
 import stanic.stduels.duel.match.player.MatchPlayer;
 import stanic.stduels.duel.match.state.MatchState;
 import stanic.stduels.duel.match.task.MatchRunnable;
+import stanic.stduels.duel.match.team.MatchTeam;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Match {
 
@@ -25,6 +30,11 @@ public class Match {
     private MatchState state = MatchState.WAITING;
 
     public void startMatch() {
+        setState(MatchState.STARTING);
+        matchController.setupPlayers();
+
+        BukkitTask task = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), getMatchRunnable(), 0L, 20L);
+        getMatchRunnable().setTask(task);
     }
 
     public void addSpectator(Player player) {
@@ -37,11 +47,11 @@ public class Match {
         return spectators;
     }
 
-    public MatchPlayer getMatchPlayer(UUID uuid) {
-        return matchPlayers.get(uuid);
+    public Optional<MatchPlayer> getMatchPlayer(UUID uuid) {
+        return Optional.ofNullable(matchPlayers.get(uuid));
     }
-    public MatchPlayer getMatchPlayer(Player player) {
-        return matchPlayers.get(player.getUniqueId());
+    public Optional<MatchPlayer> getMatchPlayer(Player player) {
+        return Optional.ofNullable(matchPlayers.get(player.getUniqueId()));
     }
 
     public MatchRunnable getMatchRunnable() {
@@ -58,8 +68,19 @@ public class Match {
 
         return matchPlayer;
     }
+
+    public boolean isSameTeam(Player one, Player two) {
+        return getMatchPlayer(one).get().getTeam() == getMatchPlayer(two).get().getTeam();
+    }
+
     public Map<UUID, MatchPlayer> getMatchPlayers() {
         return matchPlayers;
+    }
+    public List<MatchPlayer> getPlayersInTeam(MatchTeam matchTeam) {
+        return getMatchPlayers().values()
+                .stream()
+                .filter(it -> it.getTeam() == matchTeam)
+                .collect(Collectors.toList());
     }
 
     public MatchState getState() {
