@@ -4,6 +4,7 @@ import stanic.stduels.Main;
 import stanic.stduels.database.impl.IDatabase;
 import stanic.stduels.database.provider.MySQL;
 import stanic.stduels.database.provider.SQLite;
+import stanic.stduels.task.SaveTask;
 
 import java.sql.SQLException;
 
@@ -21,6 +22,7 @@ public class Database {
         }
 
         Main.getInstance().getDuelManager().loadAccounts();
+        new SaveTask().run();
     }
 
 }

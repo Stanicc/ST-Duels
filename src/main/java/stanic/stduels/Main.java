@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import stanic.stduels.database.Database;
 import stanic.stduels.database.impl.IDatabase;
 import stanic.stduels.duel.DuelManager;
+import stanic.stduels.factory.DuelFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +33,15 @@ public class Main extends JavaPlugin {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void onDisable() {
+        try {
+            new DuelFactory().save();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public void loadSettings() {
