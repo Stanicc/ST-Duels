@@ -11,6 +11,7 @@ import stanic.stduels.duel.match.state.MatchState;
 import stanic.stduels.duel.match.team.MatchTeam;
 import stanic.stduels.duel.player.PlayerDuel;
 import stanic.stduels.utils.LocationUtils;
+import stanic.stduels.utils.item.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,10 @@ public class MatchController {
         teleport();
         hide();
 
-        //give items
+        for (MatchPlayer matchPlayer : matchPlayers) {
+            new ItemUtils().getKit().forEach((slot, item) -> matchPlayer.toPlayer().getInventory().setItem(slot, item));
+            matchPlayer.toPlayer().updateInventory();
+        }
     }
     public void teleport() {
         LocationUtils locationUtils = new LocationUtils();
@@ -76,7 +80,13 @@ public class MatchController {
         new BukkitRunnable() {
             @Override
             public void run() {
-                //teleport to exit
+                match.getMatchPlayers().values().forEach(target -> {
+                    Player player = target.toPlayer();
+                    player.teleport(new LocationUtils().getLocation("pos1"));
+
+                    player.getInventory().clear();
+                    player.updateInventory();
+                });
             }
         }.runTaskLater(Main.getInstance(), 100L);
     }

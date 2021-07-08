@@ -1,0 +1,40 @@
+Database:
+  mysql: false
+  host: "localhost"
+  port: 3306
+  database: "discordSync"
+  username: "root"
+  password: ""
+
+Config:
+  kit:
+    #helmet, chestplate, leggings and boots are pre-made!
+    #leave id "null" to disable it
+    helmet:
+      id: "null"
+      data: 0
+      enchantments:
+    chestplate:
+      id: "DIAMOND_CHESTPLATE"
+      data: 0
+      #enchantment format
+      #enchantment:level
+      enchantments:
+        - "PROTECTION_ENVIRONMENTAL:3"
+    leggings:
+      id: "DIAMOND_LEGGINGS"
+      data: 0
+      enchantments:
+        - "PROTECTION_ENVIRONMENTAL:3"
+    boots:
+      id: "DIAMOND_BOOTS"
+      data: 0
+      enchantments:
+        - "PROTECTION_ENVIRONMENTAL:3"
+    others:
+      sword:
+        id: "DIAMOND_SWORD"
+        data: 0
+        slot: 0
+        enchantments:
+          - "DAMAGE_ALL:1"
