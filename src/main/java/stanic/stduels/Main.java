@@ -4,6 +4,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import stanic.stduels.commands.DuelCommand;
 import stanic.stduels.database.Database;
 import stanic.stduels.database.impl.IDatabase;
 import stanic.stduels.duel.DuelManager;
@@ -33,6 +34,8 @@ public class Main extends JavaPlugin {
                 throwable.printStackTrace();
             }
         });
+
+        getCommand("duel").setExecutor(new DuelCommand());
     }
 
     @Override

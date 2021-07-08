@@ -1,0 +1,6 @@
+name: ST-Duels
+version: 1.0
+main: stanic.stduels.Main
+author: Gabileti
+commands:
+  duel:

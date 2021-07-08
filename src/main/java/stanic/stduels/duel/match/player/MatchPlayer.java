@@ -2,6 +2,7 @@ package stanic.stduels.duel.match.player;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import stanic.stduels.duel.match.Match;
 import stanic.stduels.duel.match.team.MatchTeam;
 
 import java.util.UUID;
@@ -9,10 +10,12 @@ import java.util.UUID;
 public class MatchPlayer {
 
     private final UUID uuid;
+    private final Match match;
     private MatchTeam team;
 
-    public MatchPlayer(UUID uuid) {
+    public MatchPlayer(UUID uuid, Match match) {
         this.uuid = uuid;
+        this.match = match;
     }
 
     public UUID getUUID() {
@@ -20,6 +23,10 @@ public class MatchPlayer {
     }
     public Player toPlayer() {
         return Bukkit.getPlayer(getUUID());
+    }
+
+    public Match getMatch() {
+        return match;
     }
 
     public MatchTeam getTeam() {

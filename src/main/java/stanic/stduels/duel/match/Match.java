@@ -63,7 +63,7 @@ public class Match {
     }
 
     public MatchPlayer addPlayer(Player player) {
-        MatchPlayer matchPlayer = new MatchPlayer(player.getUniqueId());
+        MatchPlayer matchPlayer = new MatchPlayer(player.getUniqueId(), this);
         matchPlayers.put(matchPlayer.getUUID(), matchPlayer);
 
         return matchPlayer;
