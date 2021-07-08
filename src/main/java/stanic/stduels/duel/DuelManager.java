@@ -8,10 +8,7 @@ import stanic.stduels.duel.player.PlayerDuel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class DuelManager {
 
@@ -50,6 +47,10 @@ public class DuelManager {
 
     public boolean isInDuel(UUID uuid) {
         return matches.values().stream().anyMatch(it -> it.getMatchPlayer(uuid).isPresent());
+    }
+
+    public List<PlayerDuel> getAccounts() {
+        return new ArrayList<>(accounts.values());
     }
 
     public void loadAccounts() throws SQLException {
