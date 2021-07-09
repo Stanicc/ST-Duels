@@ -8,6 +8,7 @@ import stanic.stduels.commands.DuelCommand;
 import stanic.stduels.database.Database;
 import stanic.stduels.database.impl.IDatabase;
 import stanic.stduels.duel.DuelManager;
+import stanic.stduels.events.DuelListeners;
 import stanic.stduels.factory.DuelFactory;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public class Main extends JavaPlugin {
         });
 
         getCommand("duel").setExecutor(new DuelCommand());
+        getServer().getPluginManager().registerEvents(new DuelListeners(this), this);
     }
 
     @Override

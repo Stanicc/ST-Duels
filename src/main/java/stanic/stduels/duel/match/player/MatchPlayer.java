@@ -12,6 +12,7 @@ public class MatchPlayer {
     private final UUID uuid;
     private final Match match;
     private MatchTeam team;
+    private boolean isAlive;
 
     public MatchPlayer(UUID uuid, Match match) {
         this.uuid = uuid;
@@ -35,6 +36,14 @@ public class MatchPlayer {
 
     public void setTeam(MatchTeam team) {
         this.team = team;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 
 }

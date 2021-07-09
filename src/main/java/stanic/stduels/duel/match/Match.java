@@ -82,6 +82,12 @@ public class Match {
                 .filter(it -> it.getTeam() == matchTeam)
                 .collect(Collectors.toList());
     }
+    public List<MatchPlayer> getPlayersAlive(MatchTeam matchTeam) {
+        return getMatchPlayers().values()
+                .stream()
+                .filter(it -> it.getTeam() == matchTeam && it.isAlive())
+                .collect(Collectors.toList());
+    }
 
     public MatchState getState() {
         return state;
